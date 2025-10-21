@@ -1,37 +1,8 @@
-
-// Trecho de uma requisição POST no JSON do Postman
-
-// ...
-"request": {
-    "method": "POST",
-    "header": [
-        // ... headers
-    ],
-    // NOVO TRECHO DE AUTORIZAÇÃO
-    "auth": {
-        "type": "basic",
-        "basic": [
-            {
-                "key": "username",
-                "value": "user",
-                "type": "string"
-            },
-            {
-                "key": "password",
-                "value": "password",
-                "type": "string"
-            }
-        ]
-    },
-    // ... body e url
-}
-// ...
-
 {
 	"info": {
 		"_postman_id": "0d1e3f4a-8d7d-4c3e-9e2a-7b3b4d6b6c6b",
-		"name": "JavaNaPraticaPOO - Banking API (Docker Ready)",
-		"description": "Coleção de testes para a API REST de Contas Bancárias em Java/Spring Boot. Requer que o projeto esteja rodando via docker-compose.",
+		"name": "JavaNaPraticaPOO - Banking API (Produção Ready)",
+		"description": "Coleção de testes para a API REST de Contas Bancárias. Inclui Spring Security (Basic Auth) e testes de validação.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "12345678"
 	},
@@ -46,6 +17,20 @@
 						"value": "application/json"
 					}
 				],
+                // AUTORIZAÇÃO: Necessária pelo Spring Security
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"titular\": \"Cliente Teste CRUD\",\n    \"saldo\": 1000.00\n}"
@@ -63,47 +48,7 @@
 					]
 				}
 			},
-			"response": [
-				{
-					"name": "POST Criar Conta (201 Created)",
-					"originalRequest": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"titular\": \"Cliente Teste CRUD\",\n    \"saldo\": 1000.00\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/contas",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"contas"
-							]
-						}
-					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						}
-					],
-					"cookie": [],
-					"body": "{\"id\":1,\"titular\":\"Cliente Teste CRUD\",\"saldo\":1000.0}"
-				}
-			],
+			"response": [],
 			"event": [
 				{
 					"listen": "test",
@@ -136,6 +81,19 @@
 						"value": "application/json"
 					}
 				],
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"titular\": \"Cliente Saldo Negativo\",\n    \"saldo\": -50.00\n}"
@@ -159,7 +117,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"// Testa se o GlobalExceptionHandler retornou status 400 (Bad Request)",
+							"// Testa se o Bean Validation/ControllerAdvice retornou status 400 (Bad Request)",
 							"pm.test(\"Status code is 400 Bad Request\", function () {",
 							"    pm.response.to.have.status(400);",
 							"});"
@@ -174,6 +132,19 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"url": {
 					"raw": "http://localhost:8080/api/contas",
 					"protocol": "http",
@@ -210,6 +181,19 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"url": {
 					"raw": "http://localhost:8080/api/contas/{{contaId}}",
 					"protocol": "http",
@@ -247,6 +231,19 @@
 			"request": {
 				"method": "GET",
 				"header": [],
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"url": {
 					"raw": "http://localhost:8080/api/contas/99999",
 					"protocol": "http",
@@ -287,6 +284,19 @@
 						"value": "application/json"
 					}
 				],
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"titular\": \"John Doe - SALDO ATUALIZADO\",\n    \"saldo\": 50000.00\n}"
@@ -328,6 +338,19 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "user"
+						},
+						{
+							"key": "password",
+							"value": "password"
+						}
+					]
+				},
 				"url": {
 					"raw": "http://localhost:8080/api/contas/{{contaId}}",
 					"protocol": "http",
@@ -357,7 +380,53 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "GET 5.1 - Testar Actuator Health (200 OK - Sem Auth)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				// O Actuator está configurado para não exigir autenticação
+				"auth": {
+					"type": "noauth"
+				},
+				"url": {
+					"raw": "http://localhost:8080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": [],
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Status Actuator é UP\", function () {",
+							"    pm.expect(pm.response.json().status).to.eql(\"UP\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			]
 		}
 	],
-	"protocolProfileBehavior": {}
+	"variable": [
+		{
+			"key": "contaId",
+			"value": "1",
+			"type": "string"
+		}
+	]
 }
