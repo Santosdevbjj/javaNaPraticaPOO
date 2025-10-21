@@ -21,23 +21,37 @@ public class ContaBancariaController {
         this.service = service;
     }
 
-    // CREATE: POST http://localhost:8080/api/contas
+    // 1. CREATE: POST /api/contas
     @PostMapping
     public ResponseEntity<ContaBancaria> criarConta(@RequestBody ContaBancaria conta) {
         ContaBancaria novaConta = service.criar(conta);
-        // Retorna status 201 Created
-        return new ResponseEntity<>(novaConta, HttpStatus.CREATED); 
+        return new ResponseEntity<>(novaConta, HttpStatus.CREATED); // Status 201
     }
 
-    // READ ALL: GET http://localhost:8080/api/contas
+    // 2. READ ALL: GET /api/contas
     @GetMapping
     public List<ContaBancaria> listarContas() {
-        return service.listarTodos(); // Retorna status 200 OK
+        return service.listarTodos(); // Status 200
     }
     
-    // READ ONE: GET http://localhost:8080/api/contas/{id}
+    // 3. READ ONE: GET /api/contas/{id}
     @GetMapping("/{id}")
     public ContaBancaria buscarConta(@PathVariable Integer id) {
-        return service.buscarPorId(id); // Retorna status 200 OK, ou 404 (via Exception Handler)
+        // Lança ContaNaoEncontradaException, que é mapeada para 404 pelo ControllerAdvice
+        return service.buscarPorId(id); 
+    }
+    
+    // 4. UPDATE: PUT /api/contas/{id}
+    @PutMapping("/{id}")
+    public ContaBancaria atualizarConta(@PathVariable Integer id, @RequestBody ContaBancaria conta) {
+        // Lança 404 se não encontrar ou 400 se o saldo for inválido
+        return service.atualizar(id, conta);
+    }
+    
+    // 5. DELETE: DELETE /api/contas/{id}
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) // Status 204: Sucesso sem conteúdo de retorno
+    public void deletarConta(@PathVariable Integer id) {
+        service.deletar(id);
     }
 }
