@@ -1,10 +1,13 @@
 package br.com.santosdev.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal; // Importação essencial para precisão
+import jakarta.validation.constraints.DecimalMin; // NOVO
+import jakarta.validation.constraints.NotBlank;   // NOVO
+import jakarta.validation.constraints.NotNull;    // NOVO
+import java.math.BigDecimal; 
 
 /**
- * Representa uma conta bancária. Agora é uma Entidade JPA com BigDecimal.
+ * Representa uma conta bancária com anotações JPA e Bean Validation.
  */
 @Entity
 @Table(name = "conta_bancaria")
@@ -14,13 +17,15 @@ public class ContaBancaria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @NotBlank(message = "O titular da conta não pode ser vazio.")
     private String titular;
     
-    // Usando BigDecimal para precisão em valores monetários
+    @NotNull(message = "O saldo é obrigatório.")
+    @DecimalMin(value = "0.00", message = "O saldo não pode ser negativo.") // Garante que o saldo seja >= 0
     private BigDecimal saldo; 
 
     public ContaBancaria() {
-        this.saldo = BigDecimal.ZERO; // Inicializa com ZERO para evitar NullPointer
+        this.saldo = BigDecimal.ZERO;
     }
 
     public ContaBancaria(String titular, BigDecimal saldo) {
@@ -28,8 +33,9 @@ public class ContaBancaria {
         this.saldo = saldo != null ? saldo : BigDecimal.ZERO;
     }
 
-    // --- Getters e Setters Atualizados para BigDecimal ---
-
+    // ... Getters e Setters ...
+    // (Permanecem inalterados, usando BigDecimal)
+    
     public int getId() {
         return id;
     }
