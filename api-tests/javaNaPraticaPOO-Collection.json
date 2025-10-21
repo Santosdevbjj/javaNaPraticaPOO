@@ -1,3 +1,32 @@
+
+// Trecho de uma requisição POST no JSON do Postman
+
+// ...
+"request": {
+    "method": "POST",
+    "header": [
+        // ... headers
+    ],
+    // NOVO TRECHO DE AUTORIZAÇÃO
+    "auth": {
+        "type": "basic",
+        "basic": [
+            {
+                "key": "username",
+                "value": "user",
+                "type": "string"
+            },
+            {
+                "key": "password",
+                "value": "password",
+                "type": "string"
+            }
+        ]
+    },
+    // ... body e url
+}
+// ...
+
 {
 	"info": {
 		"_postman_id": "0d1e3f4a-8d7d-4c3e-9e2a-7b3b4d6b6c6b",
