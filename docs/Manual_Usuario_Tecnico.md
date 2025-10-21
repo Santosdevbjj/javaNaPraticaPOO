@@ -6,7 +6,7 @@
 **Público:** Desenvolvedores, DevOps, avaliadores técnicos (DIO), e revisores de código.
 
 ---
-```
+
 
 
 ## 📁 Estrutura do repositório (caminhos exatos)
