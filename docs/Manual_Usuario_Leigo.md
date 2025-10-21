@@ -133,9 +133,10 @@ USE java_poo;
 SELECT * FROM conta_bancaria;
 
 ---
+```
 
 
-❓ Perguntas Frequentes (FAQ)
+❓ **Perguntas Frequentes (FAQ)**
 
 P: Posso usar o sistema sem instalar MySQL?
 R: Não — os dados são persistidos no MySQL. Para uso temporário, posso gerar versão que usa arquivo local (se quiser).
