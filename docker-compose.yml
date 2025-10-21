@@ -5,43 +5,42 @@ services:
   mysql:
     image: mysql:8.0
     container_name: poojava-mysql
-    # Mapeia a porta do container para a máquina local
     ports:
       - "3306:3306"
     environment:
-      # As credenciais devem coincidir com application.properties
-      MYSQL_ROOT_PASSWORD: admin 
+      # Credenciais que devem ser as mesmas em application.properties
+      MYSQL_ROOT_PASSWORD: admin
       MYSQL_DATABASE: java_poo
-    # Persiste os dados fora do container
     volumes:
+      # Persistência dos dados
       - mysql-data:/var/lib/mysql
 
   # 2. SERVIÇO: RABBITMQ (Broker de Mensagens)
   rabbitmq:
-    image: rabbitmq:3.12-management # Inclui a interface de gestão web
+    image: rabbitmq:3.12-management
     container_name: poojava-rabbitmq
     ports:
-      - "5672:5672" # Porta padrão de mensagens
-      - "15672:15672" # Porta da interface de gestão web
+      - "5672:5672"   # Porta de Mensageria
+      - "15672:15672" # Porta da Interface de Gestão Web (http://localhost:15672)
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
       
   # 3. SERVIÇO: APLICAÇÃO JAVA (Microserviço Spring Boot)
   app:
-    build: . # Constrói a imagem a partir do Dockerfile nesta pasta
+    build: . # Constrói a imagem usando o Dockerfile na pasta atual
     container_name: poojava-app
     ports:
       - "8080:8080"
-    # Garante que o app só inicie depois que o DB e o MQ estiverem prontos
+    # Garante a ordem de inicialização
     depends_on:
       - mysql
       - rabbitmq
     environment:
-      # Sobrescreve as configurações do application.properties para usar os nomes dos containers
+      # Sobrescreve as configurações para usar os nomes dos containers como HOSTS
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/java_poo?useSSL=false
       SPRING_RABBITMQ_HOST: rabbitmq
 
-# Define os volumes para persistência dos dados
+# Volumes para persistência
 volumes:
   mysql-data:
