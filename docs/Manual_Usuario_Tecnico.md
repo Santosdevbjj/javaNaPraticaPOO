@@ -60,8 +60,9 @@ INSERT INTO conta_bancaria (titular, saldo) VALUES
 
 
 ---
+```
 
-Observações:
+**Observações:**
 
 Ajuste charset/collation se necessário (ex.: utf8mb4).
 
@@ -71,7 +72,7 @@ Para ambientes corporativos, crie usuário de aplicativo com permissões limitad
 
 ---
 
-🔗 Conexão com o banco
+🔗 **Conexão com o banco**
 
 Arquivo: src/main/java/br/com/santosdev/database/ConnectionFactory.java
 
@@ -81,7 +82,7 @@ private static final String URL = "jdbc:mysql://localhost:3306/java_poo";
 private static final String USER = "root";
 private static final String PASSWORD = "admin";
 
-Boas práticas (recomendadas):
+**Boas práticas (recomendadas):**
 
 Não hardcodear credenciais em produção.
 
@@ -99,14 +100,14 @@ String pass = System.getenv().getOrDefault("DB_PASS", "admin");
 
 
 
-🧱 Explicação da arquitetura e responsabilidades
+🧱 **Explicação da arquitetura e responsabilidades**
 
-Model
+**Model**
 
 ContaBancaria.java — POJO com atributos id, titular, saldo. Contém getters/setters e toString().
 
 
-DAO (Data Access Object)
+**DAO** (Data Access Object)
 
 ContaBancariaDAO.java — métodos:
 
@@ -124,7 +125,7 @@ Usa PreparedStatement para prevenir SQL injection básico.
 Gerenciamento de conexão com try-with-resources.
 
 
-Service
+**Service**
 
 ContaBancariaService.java — camada de regras de negócio:
 
@@ -134,7 +135,7 @@ Converte entrada do Main em objetos do domínio e chama DAO.
 
 
 
-Main (Interface)
+**Main** (Interface)
 
 Main.java — menu interativo no console:
 
@@ -147,7 +148,7 @@ Simples e síncrono — ideal para demonstração.
 
 ---
 
-🧪 Testes
+🧪 **Testes**
 
 Local: src/test/java/.../ContaBancariaTest.java
 
@@ -165,7 +166,7 @@ mvn test
 
 ---
 
-🛠️ Como rodar localmente (passo a passo técnico)
+🛠️ **Como rodar localmente (passo a passo técnico)**
 
 1. Preparar banco
 
@@ -202,48 +203,48 @@ mvn test
 
 ---
 
-🔍 Logs, erros comuns e soluções
+🔍 **Logs, erros comuns e soluções**
 
-Erro: CommunicationsException: Communications link failure
+**Erro:** CommunicationsException: Communications link failure
 
-Causa: MySQL não está rodando ou endereço incorreto.
+**Causa:** MySQL não está rodando ou endereço incorreto.
 
-Solução: Verifique systemctl status mysql (Linux), ou MySQL Workbench. Confirme URL, porta e host.
+**Solução:** Verifique systemctl status mysql (Linux), ou MySQL Workbench. Confirme URL, porta e host.
 
 
-Erro: Access denied for user 'root'@'localhost'
+**Erro:** Access denied for user 'root'@'localhost'
 
-Causa: Senha incorreta ou usuário sem permissão.
+**Causa:** Senha incorreta ou usuário sem permissão.
 
-Solução: Alterar ConnectionFactory para as credenciais corretas ou criar usuário com GRANT apropriado:
+**Solução:** Alterar ConnectionFactory para as credenciais corretas ou criar usuário com GRANT apropriado:
 
 CREATE USER 'appuser'@'localhost' IDENTIFIED BY 'senha';
 GRANT ALL PRIVILEGES ON java_poo.* TO 'appuser'@'localhost';
 FLUSH PRIVILEGES;
 
 
-Erro: Table 'java_poo.conta_bancaria' doesn't exist
+**Erro:** Table 'java_poo.conta_bancaria' doesn't exist
 
-Causa: Script SQL não executado ou banco errado.
+**Causa:** Script SQL não executado ou banco errado.
 
-Solução: Execute sql/script_banco.sql e confirme USE java_poo; SHOW TABLES;.
+**Solução:** Execute sql/script_banco.sql e confirme USE java_poo; SHOW TABLES;.
 
 
-Erro: NoClassDefFoundError ou ClassNotFoundException ao executar via mvn exec
+**Erro:** NoClassDefFoundError ou ClassNotFoundException ao executar via mvn exec
 
-Causa: Dependência faltando ou plugin exec não configurado.
+**Causa:** Dependência faltando ou plugin exec não configurado.
 
-Solução: Assegure que mvn clean install seja executado com sucesso e que o pom.xml inclua dependências necessárias. Para execução direta de um JAR, empacote com mvn package e rode java -jar target/...jar.
+**Solução:** Assegure que mvn clean install seja executado com sucesso e que o pom.xml inclua dependências necessárias. Para execução direta de um JAR, empacote com mvn package e rode java -jar target/...jar.
 
 
 
 ---
 
-🔐 Segurança e produção
+🔐 **Segurança e produção**
 
 Never commit credentials — remova credenciais do código antes de subir para repositório público.
 
-Para produção:
+**Para produção:**
 
 Use um usuário MySQL com permissões mínimas.
 
@@ -258,7 +259,7 @@ Configure backup automático do banco.
 
 ---
 
-📈 Melhorias futuras (sugestões técnicas)
+📈 **Melhorias futuras** (sugestões técnicas)
 
 Adicionar API REST (Spring Boot) para expor operações CRUD via HTTP.
 
@@ -276,7 +277,7 @@ Containerizar com Docker e orquestrar via Docker Compose.
 
 ---
 
-🔁 Migração para Docker (exemplo rápido)
+🔁 **Migração para Docker** (exemplo rápido)
 
 docker-compose.yml sugerido (resumo):
 
@@ -300,7 +301,7 @@ Após docker-compose up -d, alterar ConnectionFactory para apontar para host loc
 
 ---
 
-🔧 Debugging e logs
+🔧 **Debugging e logs**
 
 Adicione System.out.println() temporários nas camadas Service/DAO para rastrear fluxo em execução local.
 
@@ -310,7 +311,7 @@ Para projeto maior, adote SLF4J + Logback para logs configuráveis por nível (I
 
 ---
 
-📚 Referências úteis
+📚 **Referências úteis**
 
 Oracle JDBC: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 
@@ -322,12 +323,12 @@ JUnit 5: https://junit.org/junit5/
 
 ---
 
-🧾 Contato do autor
+🧾 **Contato do autor**
 
-Sérgio Santos
+**Sérgio Santos**
 Repositório: https://github.com/Santosdevbjj/javaNaPraticaPOO
 LinkedIn: (adicione seu link)
-E-mail: (adicione se desejar)
+
 
 
 ---
