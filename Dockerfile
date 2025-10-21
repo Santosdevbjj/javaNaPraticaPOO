@@ -1,22 +1,26 @@
-# 1. Fase de Build (Usa um JDK completo para compilar)
+# 1. Fase de Build (Compilação)
+# Usa uma imagem robusta com o JDK 17 para compilar o código
 FROM eclipse-temurin:17-jdk-focal AS build
-# Define o diretório de trabalho dentro do container
 WORKDIR /app
-# Copia o pom.xml e faz o download das dependências
+
+# Copia e baixa dependências para otimizar o cache do Docker
 COPY pom.xml .
 RUN mvn dependency:go-offline
-# Copia o código fonte
+
+# Copia o código fonte e constrói o JAR
 COPY src ./src
-# Compila e empacota a aplicação em um JAR
 RUN mvn clean package -DskipTests
 
-# 2. Fase de Runtime (Usa um JRE mínimo para rodar)
+# 2. Fase de Runtime (Execução)
+# Usa uma imagem JRE mínima para reduzir o tamanho final do container
 FROM eclipse-temurin:17-jre-focal
-# Define o diretório de trabalho
 WORKDIR /app
-# Copia o JAR do estágio de build para o estágio de runtime
-COPY --from=build /app/target/*.jar app.jar
+
+# Copia o JAR do estágio de build
+COPY --from=build /app/target/javaNaPraticaPOO-1.0-SNAPSHOT.jar app.jar
+
 # Expõe a porta que o Spring Boot usa
 EXPOSE 8080
-# Comando para rodar a aplicação quando o container iniciar
+
+# Comando para rodar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
