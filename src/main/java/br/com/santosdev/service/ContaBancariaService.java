@@ -3,16 +3,15 @@ package br.com.santosdev.service;
 import br.com.santosdev.config.RabbitMQConfig;
 import br.com.santosdev.dao.ContaBancariaDAO;
 import br.com.santosdev.exception.ContaNaoEncontradaException;
-import br.com.santosdev.exception.SaldoInvalidoException;
 import br.com.santosdev.model.ContaBancaria;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * Camada de serviço - executa regras de negócio e orquestra operações.
+ * Camada de serviço - Foco 100% na lógica de negócio e orquestração.
+ * As validações simples foram movidas para o Bean Validation (@DecimalMin).
  */
 @Service
 public class ContaBancariaService {
@@ -27,14 +26,12 @@ public class ContaBancariaService {
 
     // CRIAÇÃO
     public ContaBancaria criar(ContaBancaria conta) {
-        // Regra de Negócio: Saldo não pode ser negativo (comparação com BigDecimal.ZERO)
-        if (conta.getSaldo().compareTo(BigDecimal.ZERO) < 0) {
-            throw new SaldoInvalidoException("Saldo inicial não pode ser negativo."); 
-        }
+        // A validação de saldo negativo e titular vazio foi removida daqui!
+        // Ela agora é tratada automaticamente pelo @Valid e @DecimalMin/NotBlank.
         
         ContaBancaria novaConta = dao.save(conta);
         
-        // Envio Assíncrono para o RabbitMQ
+        // Envio Assíncrono
         String mensagem = String.format("ID: %d, Titular: %s", novaConta.getId(), novaConta.getTitular());
         rabbitTemplate.convertAndSend(
             RabbitMQConfig.EXCHANGE_NAME, 
@@ -56,28 +53,21 @@ public class ContaBancariaService {
             .orElseThrow(() -> new ContaNaoEncontradaException(id));
     }
 
-    // ATUALIZAÇÃO (Implementação completa do CRUD)
+    // ATUALIZAÇÃO
     public ContaBancaria atualizar(Integer id, ContaBancaria contaAtualizada) {
-        // 1. Verifica se existe (lança 404 se não)
         ContaBancaria contaExistente = dao.findById(id)
             .orElseThrow(() -> new ContaNaoEncontradaException(id));
         
-        // 2. Valida o novo saldo
-        if (contaAtualizada.getSaldo().compareTo(BigDecimal.ZERO) < 0) {
-            throw new SaldoInvalidoException("O saldo atualizado não pode ser negativo.");
-        }
+        // A validação de saldo negativo (DecimalMin) acontece no Controller.
         
-        // 3. Aplica as mudanças
         contaExistente.setTitular(contaAtualizada.getTitular());
         contaExistente.setSaldo(contaAtualizada.getSaldo()); 
 
-        // 4. Salva (JPA entende que é um UPDATE porque o ID já existe)
         return dao.save(contaExistente);
     }
     
-    // EXCLUSÃO (Implementação completa do CRUD)
+    // EXCLUSÃO
     public void deletar(Integer id) {
-        // Garante que o recurso existe antes de deletar
         dao.findById(id)
             .orElseThrow(() -> new ContaNaoEncontradaException(id));
             
