@@ -1,13 +1,20 @@
 package br.com.santosdev.model;
 
+import jakarta.persistence.*; // Import para as anotações JPA
+
 /**
- * Representa uma conta bancária com operações básicas de CRUD.
+ * Representa uma conta bancária. Agora é uma Entidade JPA.
  */
+@Entity
+@Table(name = "conta_bancaria")
 public class ContaBancaria {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String titular;
-    private double saldo;
+    private double saldo; // Sugestão: Usar BigDecimal em produção
 
     public ContaBancaria() {}
 
@@ -15,6 +22,8 @@ public class ContaBancaria {
         this.titular = titular;
         this.saldo = saldo;
     }
+
+    // Getters e Setters (Mantidos)
 
     public int getId() {
         return id;
