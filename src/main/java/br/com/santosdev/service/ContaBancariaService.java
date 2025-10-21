@@ -2,35 +2,58 @@ package br.com.santosdev.service;
 
 import br.com.santosdev.dao.ContaBancariaDAO;
 import br.com.santosdev.model.ContaBancaria;
+import br.com.santosdev.config.RabbitMQConfig;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 /**
- * Camada de serviço - executa regras de negócio antes do DAO.
+ * Camada de serviço - executa regras de negócio e orquestra operações.
+ * Agora injetada com o DAO e com o RabbitMQ.
  */
+@Service
 public class ContaBancariaService {
 
-    private final ContaBancariaDAO dao = new ContaBancariaDAO();
+    private final ContaBancariaDAO dao;
+    private final RabbitTemplate rabbitTemplate; // Injeção do RabbitMQ
 
-    public void criar(String titular, double saldo) {
-        if (saldo < 0) {
-            System.out.println("❌ Saldo inicial não pode ser negativo.");
-            return;
+    // Injeção de Dependência por Construtor (Melhor Prática)
+    public ContaBancariaService(ContaBancariaDAO dao, RabbitTemplate rabbitTemplate) {
+        this.dao = dao;
+        this.rabbitTemplate = rabbitTemplate;
+    }
+
+    public ContaBancaria criar(ContaBancaria conta) {
+        // Validação de Negócio
+        if (conta.getSaldo() < 0) {
+            // Em APIs REST, lançamos exceções para serem capturadas e retornar códigos HTTP 4xx
+            throw new IllegalArgumentException("Saldo inicial não pode ser negativo."); 
         }
-        dao.criarConta(new ContaBancaria(titular, saldo));
+        
+        // Persiste no banco
+        ContaBancaria novaConta = dao.save(conta);
+        
+        // Envio Assíncrono para o RabbitMQ (Microserviço)
+        String mensagem = String.format("ID: %d, Titular: %s", novaConta.getId(), novaConta.getTitular());
+        rabbitTemplate.convertAndSend(
+            RabbitMQConfig.EXCHANGE_NAME, 
+            RabbitMQConfig.ROUTING_KEY, 
+            mensagem
+        );
+        
+        return novaConta;
     }
 
-    public void listar() {
-        List<ContaBancaria> contas = dao.listarContas();
-        contas.forEach(System.out::println);
+    public List<ContaBancaria> listarTodos() {
+        return dao.findAll(); // Método herdado do JpaRepository
     }
 
-    public void atualizar(int id, String titular, double saldo) {
-        dao.atualizarConta(new ContaBancaria(titular, saldo) {{
-            setId(id);
-        }});
+    public ContaBancaria buscarPorId(Integer id) {
+        // Usa Optional (boa prática) e lança exceção se não encontrar (padrão REST 404)
+        return dao.findById(id)
+            .orElseThrow(() -> new RuntimeException("Conta ID " + id + " não encontrada."));
     }
-
-    public void deletar(int id) {
-        dao.deletarConta(id);
-    }
+    
+    // Métodos atualizar e deletar usam dao.save(conta) e dao.deleteById(id)
 }
