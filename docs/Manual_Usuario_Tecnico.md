@@ -1,8 +1,7 @@
 ## `docs/Manual_Usuario_Tecnico.md`
 
-```
-markdown
-#  Manual Técnico
+
+**Manual Técnico**
 **Sistema:** Java na Prática — CRUD de Contas Bancárias (Console)  
 **Público:** Desenvolvedores, DevOps, avaliadores técnicos (DIO), e revisores de código.
 
