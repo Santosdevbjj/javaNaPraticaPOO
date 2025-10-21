@@ -1,5 +1,3 @@
----
-
 ## 🧠 `docs/Manual_Usuario_Tecnico.md`
 
 ```markdown
