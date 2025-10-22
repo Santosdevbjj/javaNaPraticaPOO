@@ -165,10 +165,13 @@ docker-compose down
 
 🧪 **Testes TDD e BDD**
 
-Tipo	Framework	Arquivo	Descrição
+**Tipo**	**Framework**	**Arquivo	Descrição**
+
 
 🧩 TDD (Unidade)	JUnit 5	ContaBancariaTest.java	Valida depósitos e saques
+
 🧩 TDD (Serviço)	Mockito	ContaBancariaServiceTest.java	Simula DAO e mensageria
+
 🧩 BDD (Comportamento)	Cucumber + RestAssured	ContaBancariaSteps.java + .feature	Testes end-to-end com Gherkin
 
 
