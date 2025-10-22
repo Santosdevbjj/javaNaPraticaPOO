@@ -196,14 +196,14 @@ Funcionalidade: Criação de Conta Bancária
 ---
 
 
----
-
 📘 **Manuais do Projeto**
 
 Tipo	Descrição	Caminho
 
-👥 Manual do Usuário Leigo	Execução via Docker e uso do Postman.	docs/Manual_Usuario_Leigo.md
-👨‍💻 Manual Técnico	Estrutura de código, debugging e arquitetura.	docs/Manual_Usuario_Tecnico.md
+👥 Manual do Usuário Leigo	Execução via Docker e uso do Postman.	**docs/Manual_Usuario_Leigo.md**
+
+
+👨‍💻 Manual Técnico	Estrutura de código, debugging e arquitetura.	**docs/Manual_Usuario_Tecnico.md**
 
 
 
