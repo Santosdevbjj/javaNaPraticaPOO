@@ -200,8 +200,10 @@ Durante a execução do microsserviço, os logs são gravados no console Docker.
 
 📖 **Este repositório complementa o artigo:**
 
-> **“Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”**
-🔗 Leia o artigo completo na DIO
+- **“Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”**
+
+
+🔗 **Leia o artigo completo na DIO**
 O projeto traduz em código real os conceitos de:
 
 **Encapsulamento**
