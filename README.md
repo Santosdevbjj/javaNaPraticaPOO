@@ -107,40 +107,8 @@ javaNaPraticaPOO/ ├── api-tests/ │   └── javaNaPraticaPOO-Collecti
 <img width="946" height="1543" alt="Screenshot_20251022-192314" src="https://github.com/user-attachments/assets/271d9d3c-8635-4b18-8deb-7712dd8b3730" />
 
 
-```text
-┌────────────────────┐
-│ ContaBancaria      │
-├────────────────────┤
-│ - id: Long         │
-│ - titular: String  │
-│ - saldo: BigDecimal│
-├────────────────────┤
-│ + depositar()      │
-│ + sacar()          │
-│ + getSaldo()       │
-└────────┬───────────┘
-         │
-         ▼
-┌────────────────────┐
-│ ContaBancariaDAO   │
-│ (extends JpaRepository) │
-└────────┬───────────┘
-         │
-         ▼
-┌────────────────────┐
-│ ContaBancariaService│
-│ + salvar()          │
-│ + buscar()          │
-│ + notificar()       │
-└────────┬───────────┘
-         │
-         ▼
-┌────────────────────┐
-│ ContaBancariaController │
-│ + criarConta()      │
-│ + consultarConta()  │
-│ + deletarConta()    │
-└────────────────────┘
+```
+
 
 
 ---
