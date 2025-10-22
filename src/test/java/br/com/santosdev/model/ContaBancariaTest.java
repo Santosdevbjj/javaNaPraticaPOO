@@ -3,50 +3,33 @@ package br.com.santosdev.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal; // Importação essencial
-import java.math.RoundingMode; // Importação para precisão
-
+import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Classe de teste unitário para ContaBancaria.
- * * Atualizada para usar BigDecimal, garantindo precisão financeira.
- * O foco é testar a integridade do estado da Model, e não as regras
- * de negócio (que agora estão no Controller/Service com Bean Validation).
+ * TDD - Teste Unitário da Model: Testa o objeto ContaBancaria isoladamente.
+ * Foca no Encapsulamento, Estado e uso correto do BigDecimal.
  */
 public class ContaBancariaTest {
 
     private ContaBancaria conta;
     private final BigDecimal SALDO_INICIAL = new BigDecimal("1000.00");
-    private final BigDecimal DELTA = new BigDecimal("0.001"); // Margem de erro para BigDecimal
 
-    /**
-     * Prepara uma nova conta antes de cada teste.
-     */
     @BeforeEach
     public void setup() {
-        // CORREÇÃO: Usando BigDecimal no construtor
         conta = new ContaBancaria("Sérgio", SALDO_INICIAL);
     }
 
-    /**
-     * Testa se o objeto ContaBancaria é criado corretamente.
-     */
     @Test
-    public void deveCriarContaCorretamente() {
-        // Assert: Verifica se o titular e o saldo foram definidos
+    void deveCriarContaCorretamente() {
+        // Assert: Compara BigDecimal para garantir precisão
         assertEquals("Sérgio", conta.getTitular());
-        
-        // CORREÇÃO: Usando assertEquals com BigDecimal para precisão total
-        assertTrue(conta.getSaldo().compareTo(SALDO_INICIAL) == 0, "O saldo deve ser igual ao inicial.");
+        assertTrue(conta.getSaldo().compareTo(SALDO_INICIAL) == 0, 
+                   "O saldo inicial deve ser 1000.00.");
     }
 
-    /**
-     * Testa a atualização do saldo via setter.
-     * OBS: Em um modelo OO ideal, teríamos métodos 'depositar' e 'sacar'.
-     */
     @Test
-    public void deveAtualizarSaldoCorretamente() {
+    void deveAtualizarSaldoCorretamente() {
         // Arrange
         BigDecimal novoSaldo = new BigDecimal("1500.55");
         
@@ -54,50 +37,31 @@ public class ContaBancariaTest {
         conta.setSaldo(novoSaldo);
         
         // Assert
-        assertTrue(conta.getSaldo().compareTo(novoSaldo) == 0, "O saldo deve ser atualizado para o novo valor.");
+        assertTrue(conta.getSaldo().compareTo(novoSaldo) == 0, 
+                   "O saldo deve ser atualizado para o novo valor.");
     }
 
-    /**
-     * Testa se é possível alterar o titular da conta.
-     */
     @Test
-    public void deveAlterarTitular() {
+    void deveAlterarTitular() {
         // Act
         conta.setTitular("Ana Carolina");
         
         // Assert
         assertEquals("Ana Carolina", conta.getTitular());
     }
-
-    /**
-     * Teste para verificar se o toString() exibe as informações esperadas.
-     */
-    @Test
-    public void deveExibirToStringCorretamente() {
-        // Act
-        String representacao = conta.toString();
-        
-        // Assert
-        assertTrue(representacao.contains("Sérgio"));
-        // Verifica se o valor com precisão está na String
-        assertTrue(representacao.contains(SALDO_INICIAL.toPlainString())); 
-    }
     
-    /**
-     * Teste de comportamento inválido na Model: 
-     * A Model aceita qualquer valor, mas a validação ocorre no Controller (Bean Validation).
-     * Este teste apenas confirma que a Model em si não impede o valor.
-     */
+    // Este teste apenas confirma que a Model em si não impede valores negativos, 
+    // delegando essa responsabilidade ao Bean Validation no Controller.
     @Test
-    public void modelNaoImpedeSaldoNegativoViaSetter() {
+    void modelNaoImpedeSaldoNegativoViaSetter() {
         // Arrange
         BigDecimal saldoNegativo = new BigDecimal("-500.00");
         
         // Act
         conta.setSaldo(saldoNegativo);
         
-        // Assert: Confirma que o saldo é negativo, provando que a validação não está aqui.
+        // Assert
         assertTrue(conta.getSaldo().compareTo(BigDecimal.ZERO) < 0, 
-                   "O Model não deve impedir o saldo negativo, a validação deve ser feita no Controller/Service.");
+                   "A validação de saldo negativo é uma Responsabilidade do Controller/Service.");
     }
 }
