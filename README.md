@@ -1,111 +1,285 @@
-🚀 Microsserviço Bancário POO - Da Teoria à Produção (DIO Article Project)
-| Status | Versão | Arquitetura | Testes |
-|---|---|---|---|
-| ✅ Completo | 1.0-SNAPSHOT | Microsserviço Spring Boot | TDD (JUnit/Mockito) & BDD (Cucumber/RestAssured) |
+# 🚀 Microsserviço Bancário POO — Da Teoria à Produção  
+**Um estudo aplicado de Orientação a Objetos, TDD e BDD em Java com Spring Boot**
+
+[![Java](https://img.shields.io/badge/Java-17-red?logo=openjdk)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?logo=mysql)](https://www.mysql.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)](https://www.docker.com/)
+[![JUnit5](https://img.shields.io/badge/JUnit_5-TDD-orange?logo=java)](https://junit.org/junit5/)
+[![Cucumber](https://img.shields.io/badge/Cucumber-BDD-green?logo=cucumber)](https://cucumber.io/)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
 
 ---
 
-Este projeto é o produto final do artigo "Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software", desenvolvido para a competição de artigos da DIO. Ele demonstra como os princípios de Orientação a Objetos (OO) e Engenharia de Software evoluem de um conceito simples para uma arquitetura de Microsserviço de Nível de Produção.
-🌟 Destaques de Arquitetura e Conexão com OO
-O projeto transcende o CRUD básico, implementando componentes de produção que reforçam conceitos avançados de OO e SOLID:
+## 📚 Sumário
+1. [Sobre o Projeto](#-sobre-o-projeto)
+2. [Arquitetura e Conceitos de Engenharia](#-arquitetura-e-conceitos-de-engenharia)
+3. [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+4. [Requisitos de Software e Hardware](#-requisitos-de-software-e-hardware)
+5. [Estrutura de Pastas e Arquivos](#-estrutura-de-pastas-e-arquivos)
+6. [UML Simplificado](#-uml-simplificado)
+7. [Execução e Uso (Modo Docker)](#-execução-e-uso-modo-docker)
+8. [Testes TDD e BDD](#-testes-tdd-e-bdd)
+9. [Manuais do Projeto](#-manuais-do-projeto)
+10. [Logs de Execução e Depuração](#-logs-de-execução-e-depuração)
+11. [Conexão com o Artigo DIO](#-conexão-com-o-artigo-dio)
+12. [Autor e Referências](#-autor-e-referências)
 
 ---
 
-| Conceito do Artigo (Teoria) | Implementação no Projeto (Prática) | Foco Principal |
-|---|---|---|
-| Encapsulamento & Bean Validation | Uso de @DecimalMin e GlobalExceptionHandler. | A integridade do estado do objeto (saldo em ContaBancaria) é garantida na fronteira da API. |
-| Colaboração & Acoplamento Baixo | RabbitMQ (Mensageria Assíncrona). | O envio de notificações é desacoplado do serviço principal, um exemplo prático do princípio de Colaboração. |
-| Herança & Polimorfismo | ContaBancariaDAO estendendo JpaRepository. | Utiliza polimorfismo, onde o Spring Data implementa o contrato da Interface. |
-| Exceções & Programação Defensiva | Exceções de Domínio e GlobalExceptionHandler. | Garante que erros de negócio (HTTP 400) e recursos (HTTP 404) sejam tratados de forma profissional e previsível. |
-| Precisão Financeira | Uso de java.math.BigDecimal no Java e DECIMAL(19, 2) no MySQL. | Proteção contra erros de ponto flutuante, aderente às boas práticas financeiras. |
-💻 Tecnologia Utilizada (Tech Stack)
-| Categoria | Tecnologia | Versão | Função |
-|---|---|---|---|
-| Core | Java | 17 | Linguagem principal. |
-| Framework | Spring Boot | 3.2.0 | Simplificação e inicialização do Microsserviço. |
-| Persistência | Spring Data JPA / Hibernate | 3.2.0 | ORM e gerenciamento de dados. |
-| Banco de Dados | MySQL | 8.0 (via Docker) | Armazenamento persistente de dados. |
-| Mensageria | RabbitMQ | 3.12 (via Docker) | Broker de mensagens para comunicação assíncrona. |
-| Segurança | Spring Security | 3.2.0 | Autenticação (HTTP Basic) e Autorização. |
-| Container | Docker / Docker Compose | Últimas | Ambiente de execução isolado e orquestração de serviços. |
-| Testes TDD | JUnit 5 / Mockito | 5 / 5 | Testes unitários e de colaboração de classes. |
-| Testes BDD | Cucumber / RestAssured | 7 | Testes de sistema (API End-to-End) e comportamento. |
-🛠️ Requisitos de Software e Hardware
-O único requisito obrigatório para rodar o projeto é o Docker.
-Software
-| Software | Versão Mínima | Finalidade |
-|---|---|---|
-| Docker Engine | 20.10+ | Para construir a aplicação e rodar a stack completa. |
-| Docker Compose | 3.8+ | Para orquestrar os 3 containers (App, DB, MQ). |
-| Postman | Última | Para enviar comandos à API e usar a coleção de testes BDD. |
+## 🧭 Sobre o Projeto
+Este microsserviço é o **produto final do artigo**  
+> 🎓 *“Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”*,  
+desenvolvido por **Sérgio Santos** para a competição de artigos da DIO.
+
+Ele demonstra como aplicar princípios de:
+- **Programação Orientada a Objetos (POO)**  
+- **Test Driven Development (TDD)**  
+- **Behavior Driven Development (BDD)**  
+- **Princípios SOLID**  
+- **Boas práticas de Engenharia de Software**
+
+em um **microsserviço bancário real**, construído com **Spring Boot + Docker + MySQL + RabbitMQ**.
 
 ---
 
-Hardware
- * RAM: Mínimo de 4 GB livres (para o Docker e os três containers).
-🚀 Configuração e Execução (O Modo Docker)
-O projeto é projetado para ser iniciado com um único comando, abstraindo a configuração de Java, MySQL e RabbitMQ.
-Passo 1: Clone o Repositório
+## 🧱 Arquitetura e Conceitos de Engenharia
+| Conceito (Artigo) | Implementação no Projeto | Benefício |
+|-------------------|--------------------------|------------|
+| Encapsulamento | `ContaBancaria` usa Bean Validation e exceções personalizadas. | Protege o estado do domínio. |
+| Colaboração (Baixo Acoplamento) | RabbitMQ envia eventos assíncronos. | Promove escalabilidade e desacoplamento. |
+| Polimorfismo | `ContaBancariaDAO` estende `JpaRepository`. | Código enxuto e genérico. |
+| Programação Defensiva | `GlobalExceptionHandler` + validações. | Resiliência e previsibilidade. |
+| Precisão Financeira | `BigDecimal` e `DECIMAL(19,2)` no MySQL. | Evita erros monetários. |
+| TDD | Testes com `JUnit5` e `Mockito`. | Garante integridade do código. |
+| BDD | Testes Cucumber + RestAssured. | Valida comportamento do sistema. |
+
+---
+
+## 💻 Tecnologias Utilizadas
+| Categoria | Tecnologia | Versão | Finalidade |
+|------------|-------------|---------|-------------|
+| Linguagem | Java | 17 | Lógica de Negócio e Testes |
+| Framework | Spring Boot | 3.2.0 | Estrutura do Microsserviço |
+| Persistência | Spring Data JPA / Hibernate | 3.2.0 | ORM e Acesso a Dados |
+| Banco de Dados | MySQL | 8.0 | Armazenamento de Contas |
+| Mensageria | RabbitMQ | 3.12 | Comunicação Assíncrona |
+| Segurança | Spring Security | 3.2.0 | Autenticação (Basic Auth) |
+| Containerização | Docker / Docker Compose | Latest | Empacotamento e Orquestração |
+| Testes Unitários | JUnit 5 / Mockito | 5 / 5 | TDD |
+| Testes de Sistema | Cucumber / RestAssured | 7 | BDD |
+
+---
+
+## 🧰 Requisitos de Software e Hardware
+
+### 💾 Software
+| Ferramenta | Versão Mínima | Função |
+|-------------|----------------|---------|
+| Docker Engine | 20.10+ | Execução de containers |
+| Docker Compose | 3.8+ | Orquestração (App, DB, MQ) |
+| Postman | Última | Teste da API e cenários BDD |
+| Git | 2.25+ | Clonagem e versionamento |
+
+### ⚙️ Hardware
+- CPU: Dual Core (mínimo)
+- RAM: **4 GB livres**
+- Armazenamento: **500 MB**
+- Conexão de Internet (para pull de imagens Docker)
+
+---
+
+## 📂 Estrutura de Pastas e Arquivos 
+
+.
+
+javaNaPraticaPOO/ ├── api-tests/ │   └── javaNaPraticaPOO-Collection.json   # Coleção Postman (Cenários BDD) ├── docs/ │   ├── Manual_Usuario_Leigo.md            # Guia de execução e uso do sistema │   └── Manual_Usuario_Tecnico.md          # Guia técnico e debugging ├── sql/ │   └── script_banco.sql                   # Criação do schema e tabela ├── .gitignore                             # Ignora binários e IDE ├── pom.xml                                # Dependências Maven ├── docker-compose.yml                     # Stack: App + DB + MQ ├── Dockerfile                             # Build da imagem Java ├── README.md                              # Este arquivo └── src/ ├── main/ │   ├── java/br/com/santosdev/ │   │   ├── config/                    # Configurações globais │   │   │   ├── RabbitMQConfig.java │   │   │   └── SecurityConfig.java │   │   ├── controller/ │   │   │   ├── handler/GlobalExceptionHandler.java │   │   │   └── ContaBancariaController.java │   │   ├── dao/ContaBancariaDAO.java │   │   ├── exception/ContaNaoEncontradaException.java │   │   ├── model/ContaBancaria.java │   │   ├── service/ContaBancariaService.java │   │   └── JavaNaPraticaPooApplication.java │   └── resources/application.properties └── test/ ├── java/br/com/santosdev/ │   ├── model/ContaBancariaTest.java │   ├── service/ContaBancariaServiceTest.java │   ├── steps/ContaBancariaSteps.java │   └── ContaBancariaBDDRunner.java └── resources/features/conta_bancaria.feature
+
+
+
+---
+
+
+## 🧩 UML Simplificado (Arquitetura de Classes)
+
+```text
+┌────────────────────┐
+│ ContaBancaria      │
+├────────────────────┤
+│ - id: Long         │
+│ - titular: String  │
+│ - saldo: BigDecimal│
+├────────────────────┤
+│ + depositar()      │
+│ + sacar()          │
+│ + getSaldo()       │
+└────────┬───────────┘
+         │
+         ▼
+┌────────────────────┐
+│ ContaBancariaDAO   │
+│ (extends JpaRepository) │
+└────────┬───────────┘
+         │
+         ▼
+┌────────────────────┐
+│ ContaBancariaService│
+│ + salvar()          │
+│ + buscar()          │
+│ + notificar()       │
+└────────┬───────────┘
+         │
+         ▼
+┌────────────────────┐
+│ ContaBancariaController │
+│ + criarConta()      │
+│ + consultarConta()  │
+│ + deletarConta()    │
+└────────────────────┘
+
+
+---
+
+# 1️⃣ Clone o repositório
 git clone https://github.com/Santosdevbjj/javaNaPraticaPOO.git
 cd javaNaPraticaPOO
 
-Passo 2: Inicialize a Stack Completa
-Na pasta raiz do projeto, execute o Docker Compose. Ele fará o build da imagem Java e iniciará os três serviços em background.
+# 2️⃣ Suba toda a stack (App + MySQL + RabbitMQ)
 docker-compose up --build -d
 
-| Componente | Porta Local | Credenciais Padrão |
-|---|---|---|
-| API REST | 8080 | Basic Auth: user / password |
-| MySQL | 3306 | Root/App User (configurado no Compose) |
-| RabbitMQ Management | 15672 | guest / guest |
-Passo 3: Verificação de Saúde (Health Check)
-Aguarde 30 segundos após a execução e verifique se a API está no ar:
+# 3️⃣ Verifique se está no ar
 http://localhost:8080/actuator/health
 
-Passo 4: Teste a API (via Postman/BDD)
- * Abra o Postman.
- * Importe a coleção de testes: api-tests/javaNaPraticaPOO-Collection.json.
- * Execute a coleção para validar o fluxo CRUD, Segurança (401), e Validação (400).
-Passo 5: Parada dos Containers
-Para desligar todos os serviços e remover os containers:
+# 4️⃣ Teste via Postman
+Importe api-tests/javaNaPraticaPOO-Collection.json
+
+# 5️⃣ Parar containers
 docker-compose down
 
-📂 Estrutura Detalhada do Projeto
-A estrutura de pastas segue o padrão Spring Boot, com separação clara por responsabilidades:
-| Caminho do Arquivo/Pasta | Descrição Didática | Princípios OO/Técnicos |
-|---|---|---|
-| / (Raiz) | Arquivos de execução e build do ambiente. |  |
-| docker-compose.yml | Orquestra a rede de containers (App, MySQL, RabbitMQ). | DevOps, Colaboração. |
-| Dockerfile | Define como a aplicação Java é construída e executada dentro do container. | Imutabilidade, Abstração. |
-| pom.xml | Define as dependências da aplicação e as ferramentas de teste BDD/TDD. | Gerenciamento de Dependências. |
-| sql/ | Script de inicialização do banco. |  |
-| script_banco.sql | Cria o banco java_poo e a tabela conta_bancaria usando o tipo DECIMAL(19, 2) para precisão. | Modelagem de Dados. |
-| api-tests/ | Documentação e testes de API. |  |
-| javaNaPraticaPOO-Collection.json | Coleção Postman com cenários BDD prontos para uso. | BDD, Contrato de API. |
-| src/main/java/br/com/santosdev/... | Código Fonte Java. |  |
-| .../model/ContaBancaria.java | Entidade JPA. O objeto central do domínio, usa BigDecimal e anotações de Bean Validation. | Classe, Estado, Encapsulamento. |
-| .../dao/ContaBancariaDAO.java | Interface de Persistência. Estende JpaRepository, eliminando código boilerplate de acesso a dados. | Herança, Polimorfismo. |
-| .../service/ContaBancariaService.java | Regras de Negócio. Contém a lógica de CRUD e a Colaboração com o RabbitMQ. | Responsabilidade, SOLID (SRP). |
-| .../controller/ | Controlador REST. Recebe requisições e lida com a fronteira HTTP. | Fronteira, I/O. |
-| .../config/SecurityConfig.java | Configura o Spring Security (Basic Auth: user/password). | Segurança. |
-| .../controller/handler/GlobalExceptionHandler.java | Trata exceções de validação (400 Bad Request) e recursos (404 Not Found). | Programação Defensiva. |
-| src/test/java/br/com/santosdev/... | Suíte de Testes Automatizados. |  |
-| .../model/ContaBancariaTest.java | Testes TDD. Foca na integridade do BigDecimal na Model. | TDD, JUnit 5. |
-| .../service/ContaBancariaServiceTest.java | Testes TDD com Mocks. Testa a lógica do Service, simulando o DAO e o RabbitMQ via Mockito. | TDD, Mocking, Colaboração. |
-| .../ContaBancariaBDDRunner.java | Classe que inicializa o Cucumber para rodar o BDD. | BDD. |
-| .../steps/ContaBancariaSteps.java | Implementação da lógica BDD, usando RestAssured para fazer chamadas HTTP reais. | BDD, Teste de Sistema. |
-| src/test/resources/features/ | Arquivos .feature com cenários Gherkin (Dado, Quando, Então). | BDD, Requisitos de Negócio. |
-🧪 Estratégia de Testes (TDD vs. BDD)
-O projeto usa TDD e BDD para garantir tanto a qualidade do código interno quanto o comportamento do sistema.
-1. TDD (Desenvolvimento Orientado a Testes)
-Foca no design interno e na lógica de classes isoladas. O ciclo Red-Green-Refactor é aplicado em:
- * Model: Garantir que o BigDecimal funcione como esperado.
- * Service: Garantir que as regras de negócio e a colaboração com o RabbitMQ (usando Mockito) funcionem corretamente.
-2. BDD (Desenvolvimento Orientado a Comportamento)
-Foca no comportamento do sistema completo a partir da perspectiva do usuário/cliente da API.
- * Os cenários Gherkin testam a integração do Spring Security, Bean Validation e a persistência no MySQL.
- * É o nível de teste que valida o valor de negócio entregue ao cliente.
-🤝 Contato e Referências
- * Autor: Sérgio Santos
- * Repositório: https://github.com/Santosdevbjj/javaNaPraticaPOO
- * Referência Acadêmica: Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software (Artigo DIO).
+
+
+---
+
+
+🧪 Testes TDD e BDD
+
+Tipo	Framework	Arquivo	Descrição
+
+🧩 TDD (Unidade)	JUnit 5	ContaBancariaTest.java	Valida depósitos e saques
+🧩 TDD (Serviço)	Mockito	ContaBancariaServiceTest.java	Simula DAO e mensageria
+🧩 BDD (Comportamento)	Cucumber + RestAssured	ContaBancariaSteps.java + .feature	Testes end-to-end com Gherkin
+
+
+Fluxo de TDD — Red → Green → Refactor
+
+
+[RED] ➜ Crie um teste que falha
+[GREEN] ➜ Faça o código mínimo passar
+[REFACTOR] ➜ Melhore sem quebrar testes
+
+---
+
+Fluxo de BDD (Gherkin)
+
+Funcionalidade: Criação de Conta Bancária
+  Cenário: Saldo Inicial Negativo
+    Dado que o endpoint /api/contas está disponível
+    Quando envio POST com saldo -100.00
+    Então o sistema retorna 400 e mensagem "Saldo não pode ser negativo"
+
+
+---
+
+
+---
+
+📘 Manuais do Projeto
+
+Tipo	Descrição	Caminho
+
+👥 Manual do Usuário Leigo	Execução via Docker e uso do Postman.	docs/Manual_Usuario_Leigo.md
+👨‍💻 Manual Técnico	Estrutura de código, debugging e arquitetura.	docs/Manual_Usuario_Tecnico.md
+
+
+
+---
+
+
+🧾 Logs de Execução e Depuração
+
+Durante a execução do microsserviço, os logs são gravados no console Docker.
+
+Exemplo de log:
+
+[INFO] Conta criada com sucesso - ID: 101
+[INFO] Mensagem publicada em RabbitMQ - Fila: conta_eventos
+[WARN] Tentativa de saque com saldo insuficiente - Conta: 101
+[ERROR] ContaNaoEncontradaException: Conta inexistente
+
+---
+
+---
+
+🔗 Conexão com o Artigo DIO
+
+📖 Este repositório complementa o artigo:
+
+> “Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”
+🔗 Leia o artigo completo na DIO
+O projeto traduz em código real os conceitos de:
+
+Encapsulamento
+
+Polimorfismo
+
+Herança
+
+TDD
+
+BDD
+
+SOLID
+
+Programação Defensiva
+
+
+
+
+
+---
+
+👤 **Autor e Referências**
+
+Autor: Sérgio Santos
+📧 Contato: LinkedIn
+📦 Repositório: https://github.com/Santosdevbjj/javaNaPraticaPOO
+
+Principais Referências:
+
+Bloch, Joshua. Effective Java. Addison-Wesley, 2018.
+
+Martin, Robert C. Clean Code. Prentice Hall, 2008.
+
+Gamma et al. Design Patterns. Addison-Wesley, 1994.
+
+Oracle Java SE 17 Docs
+
+JUnit 5 User Guide
+
+Cucumber Docs
+
+Stack Overflow Developer Survey 2024
+
+
+
+---
+
+> ✨ “Testes não são o fim — são o início da engenharia de software madura.”
+
+
+
+---
+
+
+
+
