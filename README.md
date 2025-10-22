@@ -142,20 +142,20 @@ javaNaPraticaPOO/ ├── api-tests/ │   └── javaNaPraticaPOO-Collecti
 ```
 
 
-# 1️⃣ Clone o repositório
+ 1️⃣ **Clone o repositório**
 git clone https://github.com/Santosdevbjj/javaNaPraticaPOO.git
 cd javaNaPraticaPOO
 
-# 2️⃣ Suba toda a stack (App + MySQL + RabbitMQ)
+ 2️⃣ **Suba toda a stack (App + MySQL + RabbitMQ)**
 docker-compose up --build -d
 
-# 3️⃣ Verifique se está no ar
+ 3️⃣ **Verifique se está no ar**
 http://localhost:8080/actuator/health
 
-# 4️⃣ Teste via Postman
+ 4️⃣ **Teste via Postman**
 Importe api-tests/javaNaPraticaPOO-Collection.json
 
-# 5️⃣ Parar containers
+ 5️⃣ **Parar containers**
 docker-compose down
 
 
@@ -163,7 +163,7 @@ docker-compose down
 ---
 
 
-🧪 Testes TDD e BDD
+🧪 **Testes TDD e BDD**
 
 Tipo	Framework	Arquivo	Descrição
 
@@ -172,7 +172,7 @@ Tipo	Framework	Arquivo	Descrição
 🧩 BDD (Comportamento)	Cucumber + RestAssured	ContaBancariaSteps.java + .feature	Testes end-to-end com Gherkin
 
 
-Fluxo de TDD — Red → Green → Refactor
+**Fluxo de TDD — Red → Green → Refactor**
 
 
 [RED] ➜ Crie um teste que falha
@@ -181,7 +181,7 @@ Fluxo de TDD — Red → Green → Refactor
 
 ---
 
-Fluxo de BDD (Gherkin)
+**Fluxo de BDD (Gherkin)**
 
 Funcionalidade: Criação de Conta Bancária
   Cenário: Saldo Inicial Negativo
@@ -195,7 +195,7 @@ Funcionalidade: Criação de Conta Bancária
 
 ---
 
-📘 Manuais do Projeto
+📘 **Manuais do Projeto**
 
 Tipo	Descrição	Caminho
 
@@ -207,11 +207,11 @@ Tipo	Descrição	Caminho
 ---
 
 
-🧾 Logs de Execução e Depuração
+🧾 **Logs de Execução e Depuração**
 
 Durante a execução do microsserviço, os logs são gravados no console Docker.
 
-Exemplo de log:
+**Exemplo de log:**
 
 [INFO] Conta criada com sucesso - ID: 101
 [INFO] Mensagem publicada em RabbitMQ - Fila: conta_eventos
@@ -220,29 +220,28 @@ Exemplo de log:
 
 ---
 
----
 
-🔗 Conexão com o Artigo DIO
+🔗 **Conexão com o Artigo DIO**
 
-📖 Este repositório complementa o artigo:
+📖 **Este repositório complementa o artigo:**
 
-> “Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”
+> **“Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”**
 🔗 Leia o artigo completo na DIO
 O projeto traduz em código real os conceitos de:
 
-Encapsulamento
+**Encapsulamento**
 
-Polimorfismo
+**Polimorfismo**
 
-Herança
+**Herança**
 
-TDD
+**TDD**
 
-BDD
+**BDD**
 
-SOLID
+**SOLID**
 
-Programação Defensiva
+**Programação Defensiva**
 
 
 
@@ -252,11 +251,11 @@ Programação Defensiva
 
 👤 **Autor e Referências**
 
-Autor: Sérgio Santos
-📧 Contato: LinkedIn
-📦 Repositório: https://github.com/Santosdevbjj/javaNaPraticaPOO
+**Autor:** Sérgio Santos
+📧 **Contato:** LinkedIn
+📦 **Repositório:** https://github.com/Santosdevbjj/javaNaPraticaPOO
 
-Principais Referências:
+**Principais Referências:**
 
 Bloch, Joshua. Effective Java. Addison-Wesley, 2018.
 
