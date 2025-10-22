@@ -228,9 +228,13 @@ O projeto traduz em código real os conceitos de:
 
 👤 **Autor e Referências**
 
+
 **Autor:** Sérgio Santos
+
 📧 **Contato:** LinkedIn
+
 📦 **Repositório:** https://github.com/Santosdevbjj/javaNaPraticaPOO
+
 
 **Principais Referências:**
 
