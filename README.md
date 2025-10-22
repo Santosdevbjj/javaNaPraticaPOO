@@ -100,7 +100,12 @@ javaNaPraticaPOO/ ├── api-tests/ │   └── javaNaPraticaPOO-Collecti
 ---
 
 
-## 🧩 UML Simplificado (Arquitetura de Classes)
+## 🧩 UML Simplificado (Arquitetura de Classes) 
+
+
+
+<img width="946" height="1543" alt="Screenshot_20251022-192314" src="https://github.com/user-attachments/assets/271d9d3c-8635-4b18-8deb-7712dd8b3730" />
+
 
 ```text
 ┌────────────────────┐
