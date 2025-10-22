@@ -13,7 +13,9 @@ USE java_poo;
 CREATE TABLE IF NOT EXISTS conta_bancaria (
     id INT AUTO_INCREMENT PRIMARY KEY,  -- Identificador único
     titular VARCHAR(100) NOT NULL,      -- Nome do titular da conta
-    saldo DOUBLE NOT NULL               -- Saldo atual
+    -- CORREÇÃO CRÍTICA: Usando DECIMAL para precisão financeira,
+    -- aderente ao java.math.BigDecimal do modelo Java.
+    saldo DECIMAL(19, 2) NOT NULL       -- Saldo atual com precisão exata
 );
 
 -- 3️⃣ Inserir alguns dados de exemplo
@@ -25,16 +27,9 @@ INSERT INTO conta_bancaria (titular, saldo) VALUES
 -- 4️⃣ Consultar os registros
 SELECT * FROM conta_bancaria;
 
--- 5️⃣ Exemplo de atualização
--- UPDATE conta_bancaria SET saldo = 3000.00 WHERE id = 1;
-
--- 6️⃣ Exemplo de exclusão
--- DELETE FROM conta_bancaria WHERE id = 3;
-
 -- ============================================================
--- 💡 Observações:
--- - O nome do banco deve coincidir com o usado em ConnectionFactory.java
---   jdbc:mysql://localhost:3306/java_poo
--- - Usuário padrão: root
--- - Senha padrão: admin (pode ser alterada)
+-- 💡 Observações para o Microsserviço:
+-- - Este script será executado automaticamente pelo Docker Compose
+--   no container MySQL.
+-- - As credenciais são lidas a partir do docker-compose.yml e application.properties.
 -- ============================================================
