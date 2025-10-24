@@ -7,6 +7,8 @@
 🟢 **Visão geral**
 Este sistema é um serviço web seguro que permite criar, listar, atualizar e excluir contas bancárias. Ele roda em um ambiente isolado (Docker) e é acessado por requisições HTTP, utilizando um aplicativo chamado Postman para enviar os comandos.
 
+---
+
 
 ✅ **O que você precisa (pré-requisitos mínimos)**
 
@@ -27,6 +29,8 @@ Você não precisa mais instalar Java ou MySQL diretamente! O sistema usa Docker
 git clone https://github.com/Santosdevbjj/javaNaPraticaPOO.git
 cd javaNaPraticaPOO
 
+---
+
 ⚙️ **Configuração e Execução (O Novo Passo a Passo)**
 A execução do seu sistema é agora feita em um único comando que inicia 3 componentes: A Aplicação Java, o Banco de Dados MySQL e o Broker de Mensagens RabbitMQ.
 
@@ -35,11 +39,15 @@ A execução do seu sistema é agora feita em um único comando que inicia 3 com
    docker-compose up --build -d
 
    Espera-se: Este comando pode demorar alguns minutos na primeira vez, pois ele baixa as imagens (MySQL/RabbitMQ) e compila o código Java.
+
+   ---
    
  * **Verifique se está no ar:**
    Aguarde 30 segundos e verifique se o serviço está saudável, acessando o link (não precisa de login):
    http://localhost:8080/actuator/health
    Resultado esperado: Uma página ou texto JSON com {"status":"UP"}.
+
+   ---
    
 ▶️ **Como usar o sistema (via API REST)**
 Você não usa mais números no terminal; você envia comandos HTTP usando o Postman.
@@ -80,6 +88,9 @@ A coleção executa os seguintes comandos para você:
 | 4. Excluir Conta | DELETE /api/contas/{id} | Remove o registro. |
 | 5. Testes de Erro | POST/GET com dados inválidos. | Testa o tratamento de erros (400 Bad Request) e segurança (401 Unauthorized). |
 
+
+---
+
 ⚠️ **Solução de Problemas Comuns (FAQ)**
 
 | Mensagem/Problema | O que significa (Causa) | Como Agir (Solução) |
@@ -89,12 +100,17 @@ A coleção executa os seguintes comandos para você:
 | HTTP 400 Bad Request | Você violou uma regra de negócio ou formato. | Isso significa que a validação está funcionando! Exemplo: Você tentou criar uma conta com saldo negativo ou sem nome (@DecimalMin e @NotBlank). |
 | HTTP 404 Not Found | O ID da conta não existe. | Isso significa que a gestão de exceções está funcionando! |
 
+
+---
+
 🔴 **Como Parar o Sistema**
 Para desligar todos os containers e liberar as portas do seu computador:
  * Abra o terminal na pasta raiz.
  * Execute:
    docker-compose down
    
+
+---
 
 👩‍💻 **Se precisar de ajuda**
 
