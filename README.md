@@ -187,10 +187,14 @@ Durante a execução do microsserviço, os logs são gravados no console Docker.
 
 **Exemplo de log:**
 
-[INFO] Conta criada com sucesso - ID: 101
-[INFO] Mensagem publicada em RabbitMQ - Fila: conta_eventos
-[WARN] Tentativa de saque com saldo insuficiente - Conta: 101
-[ERROR] ContaNaoEncontradaException: Conta inexistente
+• [INFO] Conta criada com sucesso - ID: 101
+
+• [INFO] Mensagem publicada em RabbitMQ - Fila: conta_eventos
+
+• [WARN] Tentativa de saque com saldo insuficiente - Conta: 101
+
+• [ERROR] ContaNaoEncontradaException: Conta inexistente
+
 
 ---
 
@@ -230,9 +234,8 @@ O projeto traduz em código real os conceitos de:
 
 **Autor:** Sérgio Santos
 
-📧 **Contato:** LinkedIn 
 
-📦 **Repositório:** https://github.com/Santosdevbjj/javaNaPraticaPOO
+---
 
 
 **Principais Referências:**
