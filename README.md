@@ -28,7 +28,7 @@
 ---
 
 ## 🧭 Sobre o Projeto
-Este microsserviço é o **produto final do artigo**  
+Este microsserviço é o **produto final do artigo**   
 • 🎓 *“Java na Prática: OO para Pensar como Engenheiro de Software”*,  
 desenvolvido por **Sérgio Santos** para a 37° competição de artigos da DIO.
 
