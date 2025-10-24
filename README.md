@@ -91,9 +91,8 @@ em um **microsserviço bancário real**, construído com **Spring Boot + Docker 
 
 ## 📂 Estrutura de Pastas e Arquivos 
 
-.
 
-javaNaPraticaPOO/ ├── api-tests/ │   └── javaNaPraticaPOO-Collection.json   # Coleção Postman (Cenários BDD) ├── docs/ │   ├── Manual_Usuario_Leigo.md            # Guia de execução e uso do sistema │   └── Manual_Usuario_Tecnico.md          # Guia técnico e debugging ├── sql/ │   └── script_banco.sql                   # Criação do schema e tabela ├── .gitignore                             # Ignora binários e IDE ├── pom.xml                                # Dependências Maven ├── docker-compose.yml                     # Stack: App + DB + MQ ├── Dockerfile                             # Build da imagem Java ├── README.md                              # Este arquivo └── src/ ├── main/ │   ├── java/br/com/santosdev/ │   │   ├── config/                    # Configurações globais │   │   │   ├── RabbitMQConfig.java │   │   │   └── SecurityConfig.java │   │   ├── controller/ │   │   │   ├── handler/GlobalExceptionHandler.java │   │   │   └── ContaBancariaController.java │   │   ├── dao/ContaBancariaDAO.java │   │   ├── exception/ContaNaoEncontradaException.java │   │   ├── model/ContaBancaria.java │   │   ├── service/ContaBancariaService.java │   │   └── JavaNaPraticaPooApplication.java │   └── resources/application.properties └── test/ ├── java/br/com/santosdev/ │   ├── model/ContaBancariaTest.java │   ├── service/ContaBancariaServiceTest.java │   ├── steps/ContaBancariaSteps.java │   └── ContaBancariaBDDRunner.java └── resources/features/conta_bancaria.feature
+<img width="908" height="1666" alt="Screenshot_20251024-022933" src="https://github.com/user-attachments/assets/d1d3202c-a22e-4662-86b4-82c537031560" />
 
 
 
