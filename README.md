@@ -261,6 +261,11 @@ Stack Overflow Developer Survey 2024
 
 
 ---
+**Leia o artigo completo na plataforma da DIO:** https://web.dio.me/articles/java-na-pratica-oo-para-pensar-como-engenheiro-de-software-c470bf0a1c88?back=/articles
+
+
+---
+
 
 
 
