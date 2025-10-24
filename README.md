@@ -235,8 +235,6 @@ O projeto traduz em código real os conceitos de:
 **Autor:** Sérgio Santos
 
 
----
-
 
 **Principais Referências:**
 
