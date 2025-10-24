@@ -32,6 +32,8 @@ O projeto adota uma arquitetura de Microsserviços e a estrutura de diretórios 
 | Postman | Última | Cliente manual para testar a API REST (BDD). |
 
 
+---
+
 📦 **Dependências (pom.xml)**
 
 As dependências refletem a arquitetura de produção e a estratégia de testes TDD/BDD:
@@ -49,6 +51,9 @@ As dependências refletem a arquitetura de produção e a estratégia de testes 
 | io.cucumber | cucumber-junit, cucumber-spring | BDD Core e integração com o contexto Spring. |
 | io.rest-assured | rest-assured | Cliente HTTP robusto para testes de integração BDD. |
 
+
+---
+
 🧱 **Arquitetura e Responsabilidades (OO e SOLID)**
 
 | Camada | Responsabilidade (CRC) | Detalhes de Implementação |
@@ -59,6 +64,8 @@ As dependências refletem a arquitetura de produção e a estratégia de testes 
 | SecurityConfig | Segurança (AOP). | Configura o Filtro de Segurança para exigir Basic Auth (user/password) em todos os endpoints, exceto /actuator/**. |
 | RabbitMQ | Comunicação Assíncrona. | O método criar() no Service envia uma mensagem para o broker, desacoplando a lógica de notificação do serviço principal. |
 
+
+---
 
 🧪 **Estratégia de Testes (TDD e BDD)**
 
@@ -71,6 +78,9 @@ O projeto emprega uma estratégia de testes em três níveis:
 | .../model/ContaBancariaTest.java | Teste do Estado e Encapsulamento do POJO, validando o uso do BigDecimal. | JUnit 5. |
 | .../service/ContaBancariaServiceTest.java | Teste de Responsabilidade e Colaboração. | Mockito para simular (mockar) o ContaBancariaDAO e o RabbitTemplate, garantindo o isolamento da lógica. |
 
+
+---
+
 **Como rodar TDD: mvn test**
 
 **2. BDD (Testes de Sistema/Comportamento)**
@@ -81,6 +91,9 @@ O projeto emprega uma estratégia de testes em três níveis:
 | .../steps/ContaBancariaSteps.java | Teste da API completa (End-to-End). | RestAssured para fazer chamadas HTTP reais (POST, GET), validando o ciclo completo (Controller -> Service -> JPA -> MySQL). |
 
 **Como rodar BDD:** Execute a classe ContaBancariaBDDRunner.java via IDE ou Maven.
+
+
+---
 
 🛠️ **Execução e Debugging**
 
@@ -117,6 +130,9 @@ Para debug em tempo real:**
 Para parar e remover todos os containers:
 docker-compose down
 
+
+---
+
 🔐 **Segurança e Boas Práticas**
 
  * **Credenciais Hardcoded Removidas:**
@@ -130,6 +146,8 @@ Credenciais de MySQL (root/admin) e RabbitMQ (guest/guest) são definidas APENAS
 
  * **Precisão Financeira:** Uso de java.math.BigDecimal para o atributo saldo (essencial para evitar erros de ponto flutuante).
 
+
+   ---
    
 📈 **Melhorias Futuras**
 
