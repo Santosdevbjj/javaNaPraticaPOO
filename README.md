@@ -29,8 +29,8 @@
 
 ## 🧭 Sobre o Projeto
 Este microsserviço é o **produto final do artigo**  
-> 🎓 *“Fundamentos de Java na Prática: Orientação a Objetos para Pensar como Engenheiro de Software”*,  
-desenvolvido por **Sérgio Santos** para a competição de artigos da DIO.
+• 🎓 *“Java na Prática: OO para Pensar como Engenheiro de Software”*,  
+desenvolvido por **Sérgio Santos** para a 37° competição de artigos da DIO.
 
 Ele demonstra como aplicar princípios de:
 - **Programação Orientada a Objetos (POO)**  
