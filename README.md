@@ -1,7 +1,7 @@
 # ☕ Microsserviço Bancário POO — Da Teoria à Produção
 
-> **Bootcamp TONNIE — Java and AI in Europe**  
-> Artigo premiado na 37ª Competição de Artigos da DIO
+> Este projeto complementa meu artigo que participou da na 37ª Competição de Artigos da DIO
+
 
 [![Java](https://img.shields.io/badge/Java-17-red?logo=openjdk)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
