@@ -262,5 +262,3 @@ Analista de sistemas com experiência em desenvolvimento, suporte técnico e aut
 
 ---
 
-> *"O mercado de trabalho não contrata quem usa ferramentas — contrata quem resolve problemas com elas."*
-> — Meigarom Lopes
